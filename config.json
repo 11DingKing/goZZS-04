@@ -1,0 +1,7 @@
+{
+  "listen_addr": ":53649",
+  "escalation_timeout": "10m",
+  "escalation_check_interval": "30s",
+  "sync_replay_interval": "15s",
+  "sync_max_attempts": 5
+}
