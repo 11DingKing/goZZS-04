@@ -135,6 +135,7 @@ func (rs *ResourceService) ArbitrateResource(resourceID string) (allocated, reje
 // ReleaseResource returns allocated units to the pool.
 func (rs *ResourceService) ReleaseResource(requestID string) error {
 	rs.allocMu.Lock()
+	defer rs.allocMu.Unlock()
 
 	rr, ok := rs.store.GetResourceRequest(requestID)
 	if !ok {
@@ -149,6 +150,5 @@ func (rs *ResourceService) ReleaseResource(requestID string) error {
 	}
 	rs.store.SaveResource(r)
 	rs.store.SaveResourceRequest(rr)
-	rs.allocMu.Unlock()
 	return nil
 }
